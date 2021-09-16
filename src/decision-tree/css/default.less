@@ -9,12 +9,25 @@
   ul li {
     list-style: none;
     margin-bottom: 5px;
+    padding: 10px;
+    background: #e6e6e6;
+    display: flex;
+    align-items: center;
+    border: 4px solid transparent;
+  }
+
+  ul li:focus-within{
+    color: #EC0000;
+    background-color: #FFFFFF;
+    border: 4px solid #EC0000;
+  }
+
+  ul li input {
+    margin-right: 12px;
   }
 
   li label {
     display: block;
-    background: #e6e6e6;
-    padding: 10px;
     font-size: 1.125em;
   }
 
@@ -27,18 +40,23 @@
   }
 
   .back {
-    .osc-button;
-    .osc-previous-button;
-    line-height: 24px;
-    padding-left: 24px;
+    border: none;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
   }
-  
-  .back:before {
-    left: 8px
+  .back svg {
+    margin-right: 12px;
   }
 
   .next {
-    .osc-button;
-    .osc-next-button;
+    border: none;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+  }
+
+  .next svg {
+    margin-left: 12px;
   }
 }
