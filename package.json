@@ -1,6 +1,6 @@
 {
   "name": "openstad-components",
-  "version": "0.32.0",
+  "version": "0.37.0",
   "description": "Components for the OpenStad Ecosystem",
   "main": "index.js",
   "scripts": {
@@ -37,6 +37,7 @@
     "es6-promise-promise": "^1.0.0",
     "exports-loader": "^0.7.0",
     "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^6.2.0",
     "filepond-plugin-file-poster": "^2.4.1",
     "filepond-plugin-file-validate-size": "^2.2.2",
     "filepond-plugin-file-validate-type": "^1.2.5",
@@ -52,7 +53,7 @@
     "react-dom": "^16.11.0",
     "react-proxy-loader": "^0.3.5",
     "style-loader": "^0.23.1",
-    "uglifyjs-webpack-plugin": "^2.2.0",
+    "terser-webpack-plugin": "^5.2.4",
     "webpack": "^5.39.1",
     "webpack-cli": "^4.7.2",
     "whatwg-fetch": "^3.0.0"

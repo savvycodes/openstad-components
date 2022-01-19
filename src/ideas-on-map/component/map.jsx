@@ -118,6 +118,7 @@ export default class Map extends OpenStadComponentBaseMap {
   }
 
   fadeMarkers({ exception }) {
+    console.log('FADE');
     let self = this;
     self.markers.forEach((marker) => {
       if (exception && marker.data && marker.data.id && exception.id == marker.data.id) {
@@ -148,6 +149,7 @@ export default class Map extends OpenStadComponentBaseMap {
   }
 
   unfadeAllMarkers() {
+    console.log('UNFADE');
     let self = this;
     // markers
     self.markers.forEach((marker) => {

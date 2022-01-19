@@ -172,11 +172,11 @@ export default class OpenStadComponentIdeasOnMap extends OpenStadComponent {
 		document.addEventListener('osc-idea-tile-click', function(event) {
       self.onIdeaClick(event.detail.idea);
     });
-		document.addEventListener('osc-idea-tile-mouse-over', function(event) {
-      self.onTileMouseOver(event.detail.idea);
+		document.addEventListener('osc-idea-tile-mouse-enter', function(event) {
+      self.onTileMouseEnter(event.detail.idea);
     });
-		document.addEventListener('osc-idea-tile-mouse-out', function(event) {
-      self.onTileMouseOut(event.detail.idea);
+		document.addEventListener('osc-idea-tile-mouse-leave', function(event) {
+      self.onTileMouseLeave(event.detail.idea);
     });
 
     // details changes
@@ -307,7 +307,7 @@ export default class OpenStadComponentIdeasOnMap extends OpenStadComponent {
     let self= this;
     self.setCurrentEditIdea(null);
     self.setSelectedLocation(null);
-    let status = idea ? 'idea-selected' : self.state.status;
+    let status = idea ? ( self.state.status ==  'idea-details' ? 'idea-details' : 'idea-selected' ) : self.state.status; // TODO: en nu leesbaar
     self.setState({ selectedIdea: idea, status }, () => {
       if (idea) {
         self.map.fadeMarkers({exception: idea});
@@ -756,12 +756,13 @@ export default class OpenStadComponentIdeasOnMap extends OpenStadComponent {
 		this.onChangeMapBoundaries(); // todo: rename
   }
   
-  onTileMouseOver(idea) {
+  onTileMouseEnter(idea) {
     this.map.fadeMarkers({ exception: idea })
     this.map.updateFading();
   }
 
-  onTileMouseOut(idea) {
+  onTileMouseLeave(idea) {
+    
     this.map.unfadeAllMarkers()
     if (this.state.selectedIdea) {
       this.map.fadeMarkers({exception: this.state.selectedIdea});

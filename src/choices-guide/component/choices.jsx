@@ -46,9 +46,9 @@ export default class OpenStadComponentChoices extends OpenStadComponent {
 
     let scores = {};
     self.choiceElements.forEach((choiceElement) => {
-      scores[choiceElement.config.divId] = choiceElement.calculateScore(answers);
+      scores[choiceElement.props.data.id] = choiceElement.calculateScore(answers);
     });
-
+ 
     // for plane: calculate position
     let planePos = { x: 50, y: 50 };
     if (self.config.type) {
@@ -96,7 +96,10 @@ export default class OpenStadComponentChoices extends OpenStadComponent {
       default:
         let sorted = Object.keys(scores).sort( (a,b) => scores[b].x - scores[a].x );
         let first = sorted[0];
-        return self.choiceElements.find( elem => elem && elem.config.divId == first );
+        let second = sorted[1];
+        if ((first && scores[first].x) != (second && scores[second].x)) {
+          return self.choiceElements.find( elem => elem && elem.props && elem.props.data && elem.props.data.id == first );
+        }
     }
 
 

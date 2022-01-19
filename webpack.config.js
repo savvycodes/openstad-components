@@ -1,8 +1,7 @@
 const webpack = require("webpack");
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
- 
+const TerserPlugin = require("terser-webpack-plugin"); 
 module.exports = {
 
 	devtool: 'source-map',
@@ -12,14 +11,15 @@ module.exports = {
 	entry: {
     "all": './src/index.jsx',
     "base-map": './src/base-map/index.jsx',
+    "button": './src/button/index.jsx',
     "choices-guide": './src/choices-guide/index.jsx',
+    "forms": './src/forms/index.jsx',
     "idea-details": './src/idea-details/index.jsx',
     "ideas-overview": './src/ideas-overview/index.jsx',
     "idea-image": './src/image/index.jsx',
     "ideas-on-map": './src/ideas-on-map/index.jsx',
     "lightbox": './src/lightbox/index.jsx',
     "modal-popup": './src/modal-popup/index.jsx',
-    "numberplates": './src/numberplates/index.jsx',
     "poll": './src/poll/index.jsx',
     "previous-next-button-block": './src/previous-next-button-block/index.jsx',
     "reactions": './src/reactions/index.jsx',
@@ -48,22 +48,8 @@ module.exports = {
   ],
 
   optimization: {
-    minimizer: [
-      new UglifyJsPlugin({
-        test: /\.jsx?$/,
-        exclude: /\/core-js/,
-        minify(file, sourceMap) {
-          const extractedComments = [];
-          const { error, map, code, warnings } = require('uglify-js') // Or require('./path/to/uglify-module')
-                .minify(
-                  file,
-                  { /* Your options for minification */ },
-                );
-          return { error, map, code, warnings, extractedComments };
-        }
-        
-      })
-    ]
+    minimize: true,
+    minimizer: [new TerserPlugin()],
   },
   
 	module: {
@@ -96,19 +82,33 @@ module.exports = {
         ],
       },
 
-      // deze kwam ik ergens tegen maar heb ik nog niet geprobeerd
-			// {
-			//   test: /\.css/,
-			//   use: [
-			//   	{
-			//   		loader: MiniCssExtractPlugin.loader,
-			//   		options: {
-			//   			hmr: process.env.NODE_ENV === 'development',
-			//   		},
-			//   	},
-			//   	'css-loader',
-			//   ],
-			// },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader, 
+            options: {
+              publicPath: '../'
+            }
+          },
+          {
+            loader: "css-loader"
+          }
+        ]
+      },
+
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "images/[name].[ext]",
+              publicPath: '../'
+            },
+          },
+        ],
+      },
       
 		],
 	},

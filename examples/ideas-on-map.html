@@ -161,18 +161,15 @@
            closedText: 'Niels is gek',
          },
 
-         // likes - doet nog niets
          vote: {
            isViewable: true,
            isActive: true,
+           requiredUserRole: "anonymous",
+           voteType: "likes",
            voteValues: [
              {
                label: "voor",
                value: "yes"
-             },
-             {
-               label: "tegen",
-               value: "no"
              }
            ]
          },
@@ -205,7 +202,7 @@
          },
          
          user: {
-           fullName: "USER FULL NAME",
+           displayName: "USER DISPLAY NAME",
            role: "USER ROLE"
          },
          

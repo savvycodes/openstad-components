@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.37.0
+* Add a button component
+
+## 0.36.0
+* Remove header above like buttons if there are no like buttons
+* Better switching between ideas when clicking on map markers
+* Use mouseEnter/Leave instead of mouseOver/Out in tiles
+
+## 0.34.0
+* Move css background images to files
+* Fix choicesguide storage of scores
+
+## 0.33.0
+* Fix error when clicking on new idea button in mobile view
+* Make votebuttons in idea-details configurable
+* Fix login redirects
+
 ## 0.32.0
 * Add new configuration options to reactions
 
