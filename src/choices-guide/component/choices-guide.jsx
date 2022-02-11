@@ -339,7 +339,7 @@ export default class OpenStadComponentChoicesGuide extends OpenStadComponent {
           nextLabel = null;
         } else {
           nextAction = () => { self.gotoNextQuestion(); }
-          nextLabel = 'Volgende'
+          nextLabel = 'Versturen'
         }
         
         let previousNextButtonsHTML = null;
