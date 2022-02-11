@@ -217,10 +217,10 @@ export default class OpenStadComponentChoicesGuideResult extends OpenStadCompone
             throw response.text();
           })
           .then(function(json) {
+            OpenStadComponentLibs.localStorage.remove('osc-choices-guide.values');
+            OpenStadComponentLibs.localStorage.remove('osc-choices-guide.scores');
+            OpenStadComponentLibs.localStorage.remove('osc-choices-guide.formvalues');
             if (self.config.submission.type == 'form') {
-              OpenStadComponentLibs.localStorage.remove('osc-choices-guide.values');
-              OpenStadComponentLibs.localStorage.remove('osc-choices-guide.scores');
-              OpenStadComponentLibs.localStorage.remove('osc-choices-guide.formvalues');
               if (requireLogin) {
                 return self.logout({ afterUrl: self.config.afterUrl })
               }
