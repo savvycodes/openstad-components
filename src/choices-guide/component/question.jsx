@@ -168,6 +168,36 @@ export default class OpenStadComponentQuestion extends OpenStadComponent {
 		document.dispatchEvent(event);
   }
 
+  onKeyDownHandler (e) {
+    var current = e.target;
+    
+    // If tab is pressed
+    if (e.keyCode == 9) {
+      e.preventDefault();
+      // Find next radio / input and focus it (if possible)
+      var inputs = document.querySelectorAll('#choices-guide input, #choices-guide textarea');
+      var index = Array.prototype.indexOf.call(inputs, current);
+      
+      if (e.shiftKey) {
+        // Find previous radio / input
+        if (index > 0) {
+          inputs[index - 1].focus();
+        } else {
+          // If there is no previous radio / input, focus the last one
+          inputs[inputs.length - 1].focus();
+        }
+      } else {
+        // Find next radio / input
+        if (index < inputs.length - 1) {
+          inputs[index + 1].focus();
+        } else {
+          // If there is no next radio / input, focus the first one
+          inputs[0].focus();
+        }
+      }
+    }
+  }
+  
   toggleMoreInfo(id) {
     let elem = document.querySelector(`#${id}`);
     if (elem) {
@@ -371,7 +401,7 @@ export default class OpenStadComponentQuestion extends OpenStadComponent {
               return (
                 <div key={`div-value-${key}`} className="osc-radio-container">
                   <div className={`osc-radio-input${checked ? ' osc-radio-input-checked' : '' }`}>
-                    <input name={`enum-radio-${data.id}`} type="radio" onChange={() => self.onChangeHandler(entry.value)} id={`button-value-${key}`} key={`button-value-${key}`}/>
+                    <input name={`enum-radio-${data.id}`} type="radio" onChange={() => self.onChangeHandler(entry.value)} id={`button-value-${key}`} key={`button-value-${key}`} onKeyDown={(e) => self.onKeyDownHandler(e)}/>
                   </div>
                   <div className="osc-radio-text"><label for={`button-value-${key}`}>{entry.text}</label></div>
                 </div>
